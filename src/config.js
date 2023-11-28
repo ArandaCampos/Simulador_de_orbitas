@@ -7,7 +7,7 @@ const COLOR = {
     'orange': 0xDB8102
 }
 
-var DATA = {
+const DATA = {
     "caption": "Sistema solar",
     "background": 'assets/stars.jpg',
     "play": true,
@@ -29,7 +29,7 @@ var DATA = {
         "position": {
             "x": 50,
             "y": 0,
-            "z": 10000,
+            "z": 4000,
         },
         "rotation": {
             "x": 0,
@@ -140,10 +140,6 @@ var DATA = {
 }
 // PARAMS
 const CONTROLS = {
-    //"SEGMENTS": 20,
-    //"EMISSIVE_LIGHT": 0xFFFDF5;
-    //"LIGHT_COLOR": 0xE6D95F;
-    // CONFIGURE OF CONTROLLERS
     // animation
     "PAUSE": ' ',
     "REVERSE": 'ArrowLeft',

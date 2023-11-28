@@ -84,12 +84,12 @@ const calculate_orbit = ( planet, t ) =>{
 
 // animation
 const animation = (time) => {
-    time = 1/ 24;
+    time = 1 / 24;
     if (play){
         DATA["objects"].forEach( planet => {
             calculate_orbit( planet, frame * time );
             frame += 1;
-            //console.log("DIA : " + time * frame);
+            console.log("DIA : " + Math.floor(time * frame, 1 ));
         });
     }
 
@@ -97,7 +97,6 @@ const animation = (time) => {
 }
 
 window.addEventListener("keypress", function (event) {
-
     console.log(event.key);
     switch (event.key) {
         case CONTROLS["RIGHT"]:
@@ -123,23 +122,18 @@ window.addEventListener("keypress", function (event) {
             break;
         case CONTROLS["ROT_X_POS"]:
             camera.rotation.x += 0.1;
-            //console.log("Revertendo");
             break;
         case CONTROLS["ROT_X_NEG"]:
             camera.rotation.x -= 0.1;
-            console.log("Avançando");
             break;
         case CONTROLS["ROT_Y_POS"]:
             camera.rotation.y += 0.1;
-            //console.log("Revertendo");
             break;
         case CONTROLS["ROT_Y_NEG"]:
             camera.rotation.y -= 0.1;
-            //console.log("Avançando");
             break;
         case CONTROLS["ROT_Z_POS"]:
             camera.rotation.z += 0.1;
-            //console.log("Revertendo");
             break;
         case CONTROLS["ROT_Z_NEG"]:
             camera.rotation.z -= 0.1;
