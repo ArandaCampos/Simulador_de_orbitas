@@ -4,11 +4,54 @@
     <meta charset=utf-8>
     <title>Computação Visual - Three.js - Exemplo 2</title>
     <style>
-        body { margin: 0; }
-        canvas { width: 100%; height: 100% }
+        @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
+        body {
+            margin: 0;
+        }
+        canvas {
+            width: 100%; height: 100%;
+        }
+        #controls, #display {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            z-index: 1;
+        }
+        #controls {
+            top: 20px;
+            left: 20px;
+        }
+        #display {
+            top: 10px;
+            right: 20px;
+        }
+        label, p {
+            color: white;
+            font-family: 'Ubuntu', sans-serif;
+            font-size: 15px;
+        }
     </style>
 </head>
 <body>
+    <div id="controls">
+        <div><input type="checkbox" onchange="toggle_planet(0)" value="mer" checked> <label>Sol     </label> </div>
+        <div><input type="checkbox" onchange="toggle_planet(1)" value="mer" checked> <label>Mercúrio</label> </div>
+        <div><input type="checkbox" onchange="toggle_planet(2)" value="ven" checked> <label>Venus   </label> </div>
+        <div><input type="checkbox" onchange="toggle_planet(3)" value="ter" checked> <label>Terra   </label> </div>
+        <div><input type="checkbox" onchange="toggle_planet(4)" value="mar" checked> <label>Marte   </label> </div>
+        <div><input type="checkbox" onchange="toggle_planet(5)" value="jup" checked> <label>Jupiter </label> </div>
+        <div><input type="checkbox" onchange="toggle_planet(6)" value="sat" checked> <label>Saturno </label> </div>
+        <div><input type="checkbox" onchange="toggle_planet(7)" value="ura" checked> <label>Urano   </label> </div>
+        <div><input type="checkbox" onchange="toggle_planet(8)" value="net" checked> <label>Netuno  </label> </div>
+        </br>
+        <!--
+            <div><input type="checkbox" onchange="toggle_trail()" value="net" checked> <label>Rastro  </label> </div>
+        -->
+    </div>
+    <div id="display">
+        <p id="days"><p>
+    </div>
 <script src="three.js/three.js"></script>
 <script src="src/config.js"></script>
 <script src="src/main.js"></script>

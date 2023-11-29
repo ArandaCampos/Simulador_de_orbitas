@@ -53,6 +53,9 @@ const DATA = {
             "d": 0,
             "a": 0,
             "T": 0,
+            "r": 0,
+            "axial": 0,
+            "trail": null,
             "color": COLOR["yellow"],
             "emissive": COLOR["yellow"],
         },
@@ -64,6 +67,9 @@ const DATA = {
             "d": 5.79 * 10 ** 10,
             "a": 0,
             "T": 1 / 85,
+            "r": 58.6,
+            "axial": 0.01,
+            "trail": null,
             "texture": 'assets/mercury.jpg'
         },
         {
@@ -74,6 +80,10 @@ const DATA = {
             "d": 1.08 * 10 ** 11,
             "a": 0,
             "T": 1 / 255,
+            "r": 224,
+            "axial": 177.3,
+            "trail": null,
+            //"update_trail": null,
             "texture": 'assets/venus.jpg'
         },
         {
@@ -84,6 +94,9 @@ const DATA = {
             "d": 1.49 * 10 ** 11,
             "a": 0,
             "T": 1 / 365,
+            "r": 1,
+            "axial": 23.26,
+            "trail": null,
             "texture": 'assets/earth.jpg'
         },
         {
@@ -94,6 +107,8 @@ const DATA = {
             "d": 2.27 * 10 ** 11,
             "a": 0,
             "T": 1 / 687,
+            "r": 1.04,
+            "axial": 25.19,
             "texture": 'assets/mars.jpg'
         },
         {
@@ -104,6 +119,8 @@ const DATA = {
             "d": 7.78 * 10 ** 11,
             "a": 0,
             "T": 1 / 4329,
+            "r": 0.37,
+            "axial": 3.13,
             "texture": 'assets/jupiter.jpg'
         },
         {
@@ -114,6 +131,8 @@ const DATA = {
             "d": 1.429 * 10 ** 12,
             "a": 0,
             "T": 1 / 10753,
+            "r": 0.41,
+            "axial": 26.73,
             "texture": 'assets/saturn.jpg'
         },
         {
@@ -124,6 +143,8 @@ const DATA = {
             "d": 2.870 * 10 ** 12,
             "a": 0,
             "T": 1 / 30663,
+            "r": 0.7,
+            "axial": 97.77,
             "texture": 'assets/uranus.jpg'
         },
         {
@@ -134,6 +155,8 @@ const DATA = {
             "d": 4.5 * 10 ** 12,
             "a": 0,
             "T": 1 / 60148,
+            "r": 0.79,
+            "axial": 28.32,
             "texture": 'assets/neptune.jpg'
         }
     ]

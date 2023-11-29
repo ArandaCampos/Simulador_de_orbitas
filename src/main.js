@@ -1,3 +1,20 @@
+/*
+ *  Rastro:
+ *      const points = [];
+        points.push( new THREE.Vector3( - 10, 0, 0 ) );
+        points.push( new THREE.Vector3( 0, 10, 0 ) );
+        points.push( new THREE.Vector3( 10, 0, 0 ) );
+
+        const geometry = new THREE.BufferGeometry().setFromPoints( points );
+        const line = new THREE.Line( geometry, material );
+        scene.add( line );
+
+        renderer.render( scene, camera );
+ *
+ *
+ *      scene.children[10].geometry.attributes.position.array
+ */
+
 var camera;
 var scene;
 var renderer;
@@ -6,9 +23,9 @@ var material;
 var mesh;
 var frame = 0;
 var play = true;
+const velocity = 1 / (24 * 2);
 
 const init = () => {
-
     set_camera( DATA["camera"] );
     set_scene( DATA["scene"] );
     set_objects( DATA["objects"] );
@@ -31,29 +48,48 @@ const set_scene = ( cfg ) => {
 const set_objects = ( planets ) => {
     planets.forEach( planet => {
         planet["mesh"] = set_sphere( planet )
+        //planet["trail"] = set_trail ( planet )
     });
 }
 
-const set_sphere = ( obj ) => {
+const set_sphere = ( planet ) => {
     const SCALE = DATA["scale"];
-    const sphere = new THREE.SphereGeometry( obj["radius"] * 10, DATA["segments"], DATA["segments"] );
+    const sphere = new THREE.SphereGeometry( planet["radius"] * 10, DATA["segments"], DATA["segments"] );
 
-    if ( obj["texture"] ) {
-        texture = new THREE.TextureLoader().load(obj["texture"])
-        material = new THREE.MeshStandardMaterial({
-            map: texture,
-            emissiveMap: texture
-        });
+    if ( planet["texture"] ) {
+        texture = new THREE.TextureLoader().load( planet["texture"] )
+        material = new THREE.MeshStandardMaterial({ map: texture });
     } else {
-        material = new THREE.MeshPhongMaterial({color: obj[ "color" ], emissive: obj[ "emissive" ]});
+        material = new THREE.MeshPhongMaterial({ color: planet[ "color" ], emissive: planet[ "emissive" ]});
     }
 
     mesh = new THREE.Mesh( sphere, material );
-    mesh.position.set( 0, 0, 0 );
     scene.add( mesh );
 
     return mesh;
 }
+/*
+const set_trail = ( obj ) => {
+
+    const MAX_POINTS = 500;
+    const geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array( MAX_POINTS * 3 );
+
+    geometry.setAttribute( 'position', new THREE.BufferAttribute( positions, 3 ) );
+
+    drawCount = 0;
+    geometry.setDrawRange( 0, drawCount );
+
+    const material = new THREE.LineBasicMaterial( { color: 0xff0000 } );
+
+    line = new THREE.Line( geometry,  material );
+    line.geometry.attributes.position.needsUpdate = true;
+
+    scene.add( line );
+
+    return line.geometry;
+}
+*/
 
 const set_light = ( cfg ) => {
     const light = new THREE.PointLight(cfg["color"], cfg["intensity"]);
@@ -69,27 +105,52 @@ const render_scene = () => {
     document.body.appendChild( renderer.domElement );
 }
 
+/*
+const update_trail = ( planet , frame ) => {
+    if (frame < 50) {
+        console.log(frame);
+        const scale = DATA["scale"];
+        planet["trail"].attributes.position.array[frame * 3    ] = planet["d"] * Math.cos(planet["a"]) * scale;
+        planet["trail"].attributes.position.array[frame * 3 + 1] = planet["d"] * Math.sin(planet["a"]) * scale;
+        planet["trail"].attributes.position.array[frame * 3 + 2] = 0;
+        planet["trail"].setDrawRange(0, frame);
+    }
+}
+*/
+
+const toggle_planet = ( id ) => {
+    scene.children[id].visible = !scene.children[id].visible;
+}
+
+const toggle_play = () => {
+    play = !play;
+}
+
 const update_position = ( planet ) => {
     const scale = DATA["scale"];
     planet["mesh"].position.x = planet["d"] * Math.cos(planet["a"]) * scale;
-    planet["mesh"].position.y = planet["d"] * Math.sin(planet["a"]) * scale;
+    planet["mesh"].position.z = planet["d"] * Math.sin(planet["a"]) * scale;
 }
 
+const update_rotation = ( planet, t ) => {
+    if ( planet["r"] == 0 ) return;
+    planet["mesh"].rotation.y = t / planet["r"];
+    planet["mesh"].rotation.z = planet["axial"] / 180 * Math.PI * Math.sin(planet["a"]);
+}
 
-const calculate_orbit = ( planet, t ) =>{
+const calculate_orbit = ( planet, t ) => {
     planet["a"] = 2 * Math.PI * t * planet["T"];
-
-    update_position( planet )
 }
 
-// animation
-const animation = (time) => {
-    time = 1 / 24;
+const animation = () => {
     if (play){
         DATA["objects"].forEach( planet => {
-            calculate_orbit( planet, frame * time );
             frame += 1;
-            console.log("DIA : " + Math.floor(time * frame, 1 ));
+            calculate_orbit( planet, frame * velocity );
+            update_position( planet );
+            update_rotation( planet, frame * velocity );
+            //update_trail( planet, frame );
+            document.getElementById("days").innerHTML = Math.floor(velocity * frame, 1 ) + " dia";
         });
     }
 
@@ -97,7 +158,6 @@ const animation = (time) => {
 }
 
 window.addEventListener("keypress", function (event) {
-    console.log(event.key);
     switch (event.key) {
         case CONTROLS["RIGHT"]:
             camera.position.x += 50;
