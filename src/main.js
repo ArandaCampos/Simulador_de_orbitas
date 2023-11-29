@@ -118,7 +118,8 @@ const update_position = ( planet ) => {
 const update_rotation = ( planet, t ) => {
     if ( planet["r"] == 0 ) return;
     planet["mesh"].rotation.y = t / planet["r"];
-    planet["mesh"].rotation.z = planet["axial"] / 180 * Math.PI * Math.sin(planet["a"]);
+    //planet["mesh"].rotation.z = planet["axial"] / 180 * Math.PI;//* Math.cos(planet["a"]);
+    planet["mesh"].rotation.x = planet["axial"] / 180 * Math.PI * Math.cos(planet["a"]);
 }
 
 const calculate_orbit = ( planet, t ) => {
