@@ -48,61 +48,51 @@ const DATA = {
         {
             "name": "Sol",
             "mesh": null,
-            //"radius": 4.379 * 10 ** 9,
             "radius": 50,
             "d": 0,
             "a": 0,
             "T": 0,
             "r": 0,
             "axial": 0,
-            "trail": null,
             "color": COLOR["yellow"],
             "emissive": COLOR["yellow"],
         },
         {
             "name": "Mercúrio",
             "mesh": null,
-            //"radius": 4.87 * 10 ** 6 ,
             "radius": 6,
             "d": 5.79 * 10 ** 10,
             "a": 0,
             "T": 1 / 85,
             "r": 58.6,
             "axial": 0.01,
-            "trail": null,
             "texture": 'assets/mercury.jpg'
         },
         {
             "name": "Venus",
             "mesh": null,
-            //"radius":  1.2 * 10 ** 7,
             "radius": 11,
             "d": 1.08 * 10 ** 11,
             "a": 0,
             "T": 1 / 255,
             "r": 224,
             "axial": 177.3,
-            "trail": null,
-            //"update_trail": null,
             "texture": 'assets/venus.jpg'
         },
         {
             "name": "Terra",
             "mesh": null,
-            //"radius": 1.27 * 10 ** 7,
             "radius": 11.5,
             "d": 1.49 * 10 ** 11,
             "a": 0,
             "T": 1 / 365,
             "r": 1,
             "axial": 23.26,
-            "trail": null,
             "texture": 'assets/earth.jpg'
         },
         {
             "name": "Marte",
             "mesh": null,
-            //"radius": 6.7 * 10 ** 6,
             "radius": 6.5,
             "d": 2.27 * 10 ** 11,
             "a": 0,
@@ -114,7 +104,6 @@ const DATA = {
         {
             "name": "Jupiter",
             "mesh": null,
-            //"radius": 3,
             "radius": 30,
             "d": 7.78 * 10 ** 11,
             "a": 0,
@@ -126,7 +115,6 @@ const DATA = {
         {
             "name": "Saturno",
             "mesh": null,
-            //"radius": 1.16 * 10 ** 8,
             "radius": 25,
             "d": 1.429 * 10 ** 12,
             "a": 0,
@@ -138,7 +126,6 @@ const DATA = {
         {
             "name": "Urano",
             "mesh": null,
-            //"radius": 5 * 10 ** 7,
             "radius": 18,
             "d": 2.870 * 10 ** 12,
             "a": 0,
@@ -150,7 +137,6 @@ const DATA = {
         {
             "name": "Netuno",
             "mesh": null,
-            //"radius": 4.9 * 10 ** 7,
             "radius": 19,
             "d": 4.5 * 10 ** 12,
             "a": 0,
@@ -161,21 +147,17 @@ const DATA = {
         }
     ]
 }
-// PARAMS
+
 const CONTROLS = {
-    // animation
     "PAUSE": ' ',
     "REVERSE": 'ArrowLeft',
     "ADVANCE" : 'ArrowRight',
-    // motion
     "RIGHT": 'd',
     "LEFT": 'a',
     "UP": 'w',
     "DOWN": 's',
-    // Zoom
     "ZOOM_IN": '+',
     "ZOOM_OUT": '-',
-    // rotation
     "ROT_X_POS": 'i',
     "ROT_X_NEG": 'k',
     "ROT_Y_POS": 'l',

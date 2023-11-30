@@ -6,7 +6,7 @@ var material;
 var mesh;
 var frame = 0;
 var play = true;
-const velocity = 1 / (24 * 2);
+var velocity = 1 / 24;
 
 const init = () => {
     set_camera( DATA["camera"] );
@@ -31,7 +31,6 @@ const set_scene = ( cfg ) => {
 const set_objects = ( planets ) => {
     planets.forEach( planet => {
         planet["mesh"] = set_sphere( planet )
-        //planet["trail"] = set_trail ( planet )
     });
 }
 
@@ -51,28 +50,6 @@ const set_sphere = ( planet ) => {
 
     return mesh;
 }
-/*
-const set_trail = ( obj ) => {
-
-    const MAX_POINTS = 500;
-    const geometry = new THREE.BufferGeometry();
-    const positions = new Float32Array( MAX_POINTS * 3 );
-
-    geometry.setAttribute( 'position', new THREE.BufferAttribute( positions, 3 ) );
-
-    drawCount = 0;
-    geometry.setDrawRange( 0, drawCount );
-
-    const material = new THREE.LineBasicMaterial( { color: 0xff0000 } );
-
-    line = new THREE.Line( geometry,  material );
-    line.geometry.attributes.position.needsUpdate = true;
-
-    scene.add( line );
-
-    return line.geometry;
-}
-*/
 
 const set_light = ( cfg ) => {
     const light = new THREE.PointLight(cfg["color"], cfg["intensity"]);
@@ -88,18 +65,11 @@ const render_scene = () => {
     document.body.appendChild( renderer.domElement );
 }
 
-/*
-const update_trail = ( planet , frame ) => {
-    if (frame < 50) {
-        console.log(frame);
-        const scale = DATA["scale"];
-        planet["trail"].attributes.position.array[frame * 3    ] = planet["d"] * Math.cos(planet["a"]) * scale;
-        planet["trail"].attributes.position.array[frame * 3 + 1] = planet["d"] * Math.sin(planet["a"]) * scale;
-        planet["trail"].attributes.position.array[frame * 3 + 2] = 0;
-        planet["trail"].setDrawRange(0, frame);
-    }
+const set_velocity = ( value ) => {
+    frame = frame * velocity;
+    velocity = 1 / 24 * value / 50;
+    frame = frame / velocity;
 }
-*/
 
 const toggle_planet = ( id ) => {
     scene.children[id].visible = !scene.children[id].visible;

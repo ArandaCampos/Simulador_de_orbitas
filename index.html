@@ -22,6 +22,12 @@
             top: 20px;
             left: 20px;
         }
+        #controls > div {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 5px;
+        }
         #display {
             top: 10px;
             right: 20px;
@@ -35,25 +41,53 @@
 </head>
 <body>
     <div id="controls">
-        <div><input type="checkbox" onchange="toggle_planet(0)" value="mer" checked> <label>Sol     </label> </div>
-        <div><input type="checkbox" onchange="toggle_planet(1)" value="mer" checked> <label>Mercúrio</label> </div>
-        <div><input type="checkbox" onchange="toggle_planet(2)" value="ven" checked> <label>Venus   </label> </div>
-        <div><input type="checkbox" onchange="toggle_planet(3)" value="ter" checked> <label>Terra   </label> </div>
-        <div><input type="checkbox" onchange="toggle_planet(4)" value="mar" checked> <label>Marte   </label> </div>
-        <div><input type="checkbox" onchange="toggle_planet(5)" value="jup" checked> <label>Jupiter </label> </div>
-        <div><input type="checkbox" onchange="toggle_planet(6)" value="sat" checked> <label>Saturno </label> </div>
-        <div><input type="checkbox" onchange="toggle_planet(7)" value="ura" checked> <label>Urano   </label> </div>
-        <div><input type="checkbox" onchange="toggle_planet(8)" value="net" checked> <label>Netuno  </label> </div>
+        <div>
+            <input type="range" min="1" max="100" onchange="set_velocity(this.value)" step="1" value="50">
+            <label>Linha do tempo</label>
+        </div>
         </br>
-        <!--
-            <div><input type="checkbox" onchange="toggle_trail()" value="net" checked> <label>Rastro  </label> </div>
-        -->
+        <div>
+            <input type="checkbox" onchange="toggle_planet(0)" value="mer" checked>
+            <label>Sol</label>
+        </div>
+        <div>
+            <input type="checkbox" onchange="toggle_planet(1)" value="mer" checked>
+            <label>Mercúrio</label>
+        </div>
+        <div>
+            <input type="checkbox" onchange="toggle_planet(2)" value="ven" checked>
+            <label>Venus</label>
+        </div>
+        <div>
+            <input type="checkbox" onchange="toggle_planet(3)" value="ter" checked>
+            <label>Terra</label>
+        </div>
+        <div>
+            <input type="checkbox" onchange="toggle_planet(4)" value="mar" checked>
+            <label>Marte</label>
+        </div>
+        <div>
+            <input type="checkbox" onchange="toggle_planet(5)" value="jup" checked>
+            <label>Jupiter</label>
+        </div>
+        <div>
+            <input type="checkbox" onchange="toggle_planet(6)" value="sat" checked>
+            <label>Saturno</label>
+        </div>
+        <div>
+            <input type="checkbox" onchange="toggle_planet(7)" value="ura" checked>
+            <label>Urano</label>
+        </div>
+        <div>
+            <input type="checkbox" onchange="toggle_planet(8)" value="net" checked>
+            <label>Netuno</label>
+        </div>
     </div>
     <div id="display">
         <p id="days"><p>
     </div>
-<script src="three.js/three.js"></script>
-<script src="src/config.js"></script>
-<script src="src/main.js"></script>
+    <script src="three.js/three.js"></script>
+    <script src="src/config.js"></script>
+    <script src="src/main.js"></script>
 </body>
 </html>
